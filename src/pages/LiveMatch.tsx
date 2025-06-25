@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
@@ -7,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { Clock, Target, Users, Play, Pause, Square } from 'lucide-react';
+import { Clock, Target, Users, Play, Pause, Square, Share2, Sparkles } from 'lucide-react';
 import { toast } from 'sonner';
 
 interface LiveMatchData {
@@ -39,10 +38,10 @@ const LiveMatch = () => {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'live': return 'bg-green-500';
-      case 'paused': return 'bg-yellow-500';
-      case 'finished': return 'bg-gray-500';
-      default: return 'bg-blue-500';
+      case 'live': return 'bg-gradient-to-r from-green-500 to-emerald-500';
+      case 'paused': return 'bg-gradient-to-r from-yellow-500 to-orange-500';
+      case 'finished': return 'bg-gradient-to-r from-gray-500 to-slate-500';
+      default: return 'bg-gradient-to-r from-blue-500 to-cyan-500';
     }
   };
 
@@ -147,66 +146,90 @@ const LiveMatch = () => {
   }, [searchParams]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-green-50 to-green-100 p-4">
-      <div className="max-w-md mx-auto space-y-4">
-        {/* Header */}
-        <div className="text-center py-4">
-          <h1 className="text-2xl font-bold text-green-800 mb-2">🏑 Live Match</h1>
-          <p className="text-green-600 text-sm">Follow your team's game in real-time</p>
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50 p-4 relative overflow-hidden">
+      {/* Animated background pattern */}
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="%2322c55e" fill-opacity="0.02"%3E%3Cpath d="M20 20c0 11.046-8.954 20-20 20v20h40V20H20z"/%3E%3C/g%3E%3C/svg%3E')] animate-pulse"></div>
+      
+      <div className="max-w-md mx-auto space-y-6 relative z-10">
+        {/* Enhanced Header */}
+        <div className="text-center py-6 animate-fade-in">
+          <div className="flex items-center justify-center gap-3 mb-3">
+            <div className="w-12 h-12 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center shadow-lg">
+              <span className="text-2xl">🏑</span>
+            </div>
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-green-700 to-emerald-600 bg-clip-text text-transparent">
+              Live Match
+            </h1>
+          </div>
+          <p className="text-green-600 font-medium">Follow your team's game in real-time</p>
         </div>
 
-        {/* Match Key Input */}
-        <Card className="shadow-lg">
-          <CardHeader className="pb-3">
-            <CardTitle className="text-lg flex items-center gap-2">
+        {/* Enhanced Match Key Input */}
+        <Card className="shadow-xl border-0 bg-white/90 backdrop-blur-sm animate-scale-in">
+          <CardHeader className="pb-4">
+            <CardTitle className="text-lg flex items-center gap-2 text-green-800">
               <Target className="w-5 h-5" />
               Enter Match Key
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <form onSubmit={handleKeySubmit} className="space-y-3">
-              <Input
-                type="text"
-                placeholder="Enter match key (e.g., ABC123)"
-                value={matchKey}
-                onChange={(e) => setMatchKey(e.target.value.toUpperCase())}
-                className="text-center text-lg font-mono"
-                maxLength={10}
-              />
+            <form onSubmit={handleKeySubmit} className="space-y-4">
+              <div className="relative">
+                <Input
+                  type="text"
+                  placeholder="Enter match key (e.g., ABC123)"
+                  value={matchKey}
+                  onChange={(e) => setMatchKey(e.target.value.toUpperCase())}
+                  className="text-center text-lg font-mono border-2 focus:border-green-400 transition-colors"
+                  maxLength={10}
+                />
+                <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                  <Sparkles className="w-4 h-4 text-green-400" />
+                </div>
+              </div>
               <Button 
                 type="submit" 
-                className="w-full bg-green-600 hover:bg-green-700"
+                className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300"
                 disabled={loading || !matchKey.trim()}
               >
-                {loading ? 'Loading...' : 'Follow Match'}
+                {loading ? (
+                  <div className="flex items-center gap-2">
+                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    Loading...
+                  </div>
+                ) : (
+                  'Follow Match'
+                )}
               </Button>
             </form>
             {error && (
-              <div className="mt-3 p-3 bg-red-50 border border-red-200 rounded-md">
-                <p className="text-red-600 text-sm">{error}</p>
+              <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg animate-fade-in">
+                <p className="text-red-600 text-sm font-medium">{error}</p>
               </div>
             )}
           </CardContent>
         </Card>
 
-        {/* Live Match Data */}
+        {/* Enhanced Live Match Data */}
         {matchData && (
-          <div className="space-y-4">
-            {/* Status Badge */}
+          <div className="space-y-6 animate-fade-in">
+            {/* Animated Status Badge */}
             <div className="flex justify-center">
-              <Badge className={`${getStatusColor(matchData.status)} text-white px-4 py-2 text-sm font-semibold`}>
-                {getStatusIcon(matchData.status)}
-                <span className="ml-2 capitalize">{matchData.status.replace('_', ' ')}</span>
+              <Badge className={`${getStatusColor(matchData.status)} text-white px-6 py-3 text-sm font-semibold shadow-lg animate-pulse`}>
+                <div className="flex items-center gap-2">
+                  {getStatusIcon(matchData.status)}
+                  <span className="capitalize">{matchData.status.replace('_', ' ')}</span>
+                </div>
               </Badge>
             </div>
 
-            {/* Scoreboard */}
-            <Card className="shadow-lg border-2 border-green-200">
-              <CardContent className="p-6">
-                <div className="grid grid-cols-3 items-center gap-4">
+            {/* Enhanced Scoreboard */}
+            <Card className="shadow-2xl border-0 bg-gradient-to-br from-white to-green-50/50 backdrop-blur-sm animate-scale-in">
+              <CardContent className="p-8">
+                <div className="grid grid-cols-3 items-center gap-6">
                   {/* Home Team */}
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-green-800 mb-1">
+                    <div className="text-4xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mb-2 animate-bounce">
                       {matchData.home_score}
                     </div>
                     <div className="text-sm font-semibold text-gray-700 break-words">
@@ -214,14 +237,14 @@ const LiveMatch = () => {
                     </div>
                   </div>
 
-                  {/* VS Separator */}
+                  {/* VS Separator with animation */}
                   <div className="text-center">
-                    <div className="text-gray-400 text-sm font-medium">VS</div>
+                    <div className="text-gray-400 text-lg font-bold animate-pulse">VS</div>
                   </div>
 
                   {/* Away Team */}
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-green-800 mb-1">
+                    <div className="text-4xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mb-2 animate-bounce">
                       {matchData.away_score}
                     </div>
                     <div className="text-sm font-semibold text-gray-700 break-words">
@@ -230,34 +253,37 @@ const LiveMatch = () => {
                   </div>
                 </div>
 
-                <Separator className="my-4" />
+                <Separator className="my-6 bg-gradient-to-r from-transparent via-green-200 to-transparent" />
 
-                {/* Match Info */}
-                <div className="grid grid-cols-2 gap-4 text-sm">
-                  <div className="flex items-center gap-2">
-                    <Clock className="w-4 h-4 text-green-600" />
-                    <span>Time: {formatTime(matchData.match_time)}</span>
+                {/* Enhanced Match Info */}
+                <div className="grid grid-cols-2 gap-6 text-sm">
+                  <div className="flex items-center gap-3 p-3 bg-green-50 rounded-lg">
+                    <Clock className="w-5 h-5 text-green-600" />
+                    <span className="font-medium">Time: {formatTime(matchData.match_time)}</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Users className="w-4 h-4 text-green-600" />
-                    <span>Quarter: {matchData.current_quarter}</span>
+                  <div className="flex items-center gap-3 p-3 bg-blue-50 rounded-lg">
+                    <Users className="w-5 h-5 text-blue-600" />
+                    <span className="font-medium">Quarter: {matchData.current_quarter}</span>
                   </div>
                 </div>
               </CardContent>
             </Card>
 
-            {/* Last Event */}
+            {/* Enhanced Last Event */}
             {matchData.last_event && (
-              <Card className="shadow-md border-orange-200 bg-orange-50">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-sm text-orange-800">Latest Event</CardTitle>
+              <Card className="shadow-lg border-0 bg-gradient-to-r from-orange-50 to-amber-50 animate-fade-in">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-sm text-orange-800 flex items-center gap-2">
+                    <Sparkles className="w-4 h-4" />
+                    Latest Event
+                  </CardTitle>
                 </CardHeader>
                 <CardContent className="pt-0">
-                  <p className="text-sm text-orange-700 font-medium">
+                  <p className="text-sm text-orange-700 font-medium mb-2">
                     {matchData.last_event}
                   </p>
                   {matchData.last_event_time && (
-                    <p className="text-xs text-orange-600 mt-1">
+                    <p className="text-xs text-orange-600">
                       {new Date(matchData.last_event_time).toLocaleTimeString()}
                     </p>
                   )}
@@ -265,8 +291,8 @@ const LiveMatch = () => {
               </Card>
             )}
 
-            {/* Share Button */}
-            <Card className="shadow-md">
+            {/* Enhanced Share Button */}
+            <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm">
               <CardContent className="p-4">
                 <Button
                   onClick={() => {
@@ -275,8 +301,9 @@ const LiveMatch = () => {
                     toast.success('Match link copied to clipboard!');
                   }}
                   variant="outline"
-                  className="w-full"
+                  className="w-full border-2 border-green-200 hover:bg-green-50 transition-all duration-300 group"
                 >
+                  <Share2 className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform" />
                   📱 Share Match Link
                 </Button>
               </CardContent>
@@ -284,15 +311,30 @@ const LiveMatch = () => {
           </div>
         )}
 
-        {/* Instructions */}
-        <Card className="shadow-md bg-blue-50 border-blue-200">
-          <CardContent className="p-4">
-            <h3 className="font-semibold text-blue-800 mb-2">How to follow a match:</h3>
-            <ol className="text-sm text-blue-700 space-y-1">
-              <li>1. Get the match key from your coach</li>
-              <li>2. Enter it above and tap "Follow Match"</li>
-              <li>3. Watch live updates automatically appear</li>
-              <li>4. Share the link with other parents!</li>
+        {/* Enhanced Instructions */}
+        <Card className="shadow-lg border-0 bg-gradient-to-br from-blue-50 to-cyan-50 animate-fade-in">
+          <CardContent className="p-6">
+            <h3 className="font-semibold text-blue-800 mb-4 flex items-center gap-2">
+              <Target className="w-5 h-5" />
+              How to follow a match:
+            </h3>
+            <ol className="text-sm text-blue-700 space-y-2">
+              <li className="flex items-start gap-3">
+                <span className="flex-shrink-0 w-6 h-6 bg-blue-200 rounded-full flex items-center justify-center text-xs font-bold">1</span>
+                Get the match key from your coach
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="flex-shrink-0 w-6 h-6 bg-blue-200 rounded-full flex items-center justify-center text-xs font-bold">2</span>
+                Enter it above and tap "Follow Match"
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="flex-shrink-0 w-6 h-6 bg-blue-200 rounded-full flex items-center justify-center text-xs font-bold">3</span>
+                Watch live updates automatically appear
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="flex-shrink-0 w-6 h-6 bg-blue-200 rounded-full flex items-center justify-center text-xs font-bold">4</span>
+                Share the link with other parents!
+              </li>
             </ol>
           </CardContent>
         </Card>
