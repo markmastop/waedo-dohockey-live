@@ -18,6 +18,7 @@ interface LiveMatchData {
   match_time: number;
   status: string;
   last_event: string | null;
+  last_event_time: string | null;
 }
 
 const LiveMatchAdmin = () => {
