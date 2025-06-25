@@ -245,6 +245,65 @@ export type Database = {
           },
         ]
       }
+      matches_live: {
+        Row: {
+          away_score: number
+          away_team: string
+          created_at: string
+          current_quarter: number
+          home_score: number
+          home_team: string
+          id: string
+          last_event: string | null
+          last_event_time: string | null
+          match_id: string | null
+          match_key: string
+          match_time: number
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          away_score?: number
+          away_team: string
+          created_at?: string
+          current_quarter?: number
+          home_score?: number
+          home_team: string
+          id?: string
+          last_event?: string | null
+          last_event_time?: string | null
+          match_id?: string | null
+          match_key: string
+          match_time?: number
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          away_score?: number
+          away_team?: string
+          created_at?: string
+          current_quarter?: number
+          home_score?: number
+          home_team?: string
+          id?: string
+          last_event?: string | null
+          last_event_time?: string | null
+          match_id?: string | null
+          match_key?: string
+          match_time?: number
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "matches_live_match_id_fkey"
+            columns: ["match_id"]
+            isOneToOne: false
+            referencedRelation: "matches"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       news_items: {
         Row: {
           created_at: string
