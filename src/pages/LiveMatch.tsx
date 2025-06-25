@@ -62,25 +62,33 @@ const LiveMatch = () => {
     setError(null);
     
     try {
+      console.log('Fetching match data for key:', key);
+      
       const { data, error } = await supabase
         .from('matches_live')
         .select('*')
-        .eq('match_key', key.trim())
-        .single();
+        .eq('match_key', key.trim().toUpperCase())
+        .maybeSingle();
+
+      console.log('Supabase response:', { data, error });
 
       if (error) {
-        if (error.code === 'PGRST116') {
-          setError('Match not found. Please check your match key.');
-        } else {
-          setError('Failed to load match data.');
-        }
+        console.error('Supabase error:', error);
+        setError('Failed to load match data. Please try again.');
+        setMatchData(null);
+        return;
+      }
+
+      if (!data) {
+        setError('Match not found. Please check your match key.');
         setMatchData(null);
         return;
       }
 
       setMatchData(data);
-      setSearchParams({ key: key.trim() });
+      setSearchParams({ key: key.trim().toUpperCase() });
     } catch (err) {
+      console.error('Fetch error:', err);
       setError('An unexpected error occurred.');
       setMatchData(null);
     } finally {
@@ -96,6 +104,8 @@ const LiveMatch = () => {
   // Set up real-time subscription
   useEffect(() => {
     if (!matchData) return;
+
+    console.log('Setting up real-time subscription for:', matchData.match_key);
 
     const channel = supabase
       .channel('live-match-updates')
@@ -117,9 +127,12 @@ const LiveMatch = () => {
           }
         }
       )
-      .subscribe();
+      .subscribe((status) => {
+        console.log('Subscription status:', status);
+      });
 
     return () => {
+      console.log('Cleaning up subscription');
       supabase.removeChannel(channel);
     };
   }, [matchData?.match_key]);
