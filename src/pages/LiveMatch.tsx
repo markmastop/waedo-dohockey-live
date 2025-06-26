@@ -121,7 +121,7 @@ const LiveMatch = () => {
 
   return (
     <div className="min-h-screen bg-white p-4">
-      <div className="max-w-lg mx-auto space-y-8">
+      <div className="max-w-lg mx-auto space-y-6">
         <LiveMatchHeader />
 
         {showMatchKeyInput ? (

@@ -1,6 +1,6 @@
 const LiveMatchHeader = () => {
   return (
-    <div className="text-center py-8 space-y-4">
+    <div className="text-center py-4 space-y-2">
       <img
         src="/lovable-uploads/0eca3ff3-5e4a-4be9-881d-e839832a5b13.png"
         alt="We Do Hockey Logo"
