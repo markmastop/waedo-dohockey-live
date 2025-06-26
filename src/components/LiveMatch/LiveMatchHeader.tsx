@@ -6,14 +6,14 @@ const LiveMatchHeader = () => {
     <div className="text-center py-8 animate-fade-in">
       <div className="flex items-center justify-center gap-4 mb-6">
         <div className="relative group">
-          <div className="w-20 h-20 bg-white rounded-2xl flex items-center justify-center shadow-2xl group-hover:scale-110 transition-all duration-500 border-3 border-orange-200">
+          <div className="w-20 h-20 flex items-center justify-center group-hover:scale-105 transition-all duration-300">
             <img 
               src="/lovable-uploads/0eca3ff3-5e4a-4be9-881d-e839832a5b13.png" 
               alt="We Do Hockey Logo" 
               className="w-16 h-16 object-contain"
             />
           </div>
-          <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-r from-red-400 to-orange-400 rounded-full flex items-center justify-center animate-bounce">
+          <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-r from-red-400 to-orange-400 rounded-md flex items-center justify-center animate-bounce">
             <Zap className="w-3 h-3 text-white" />
           </div>
         </div>

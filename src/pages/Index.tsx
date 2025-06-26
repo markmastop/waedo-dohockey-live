@@ -21,22 +21,22 @@ const Index = () => {
       <div className="absolute bottom-32 left-20 w-5 h-5 bg-amber-400 rounded-full animate-bounce opacity-50" style={{ animationDelay: '1s' }}></div>
       
       <div className="max-w-md w-full space-y-8 relative z-10">
-        {/* Enhanced header with bigger logo */}
+        {/* Flat header with clean logo */}
         <div className="text-center animate-fade-in">
           <div className="mb-8 flex justify-center">
             <div className="relative group">
-              {/* Much bigger logo to match text size */}
-              <div className="w-64 h-64 bg-white rounded-3xl flex items-center justify-center shadow-2xl transform hover:scale-110 transition-all duration-500 group-hover:rotate-3 border-4 border-orange-200">
+              {/* Clean logo without box */}
+              <div className="w-64 h-64 flex items-center justify-center transform hover:scale-105 transition-all duration-300">
                 <img 
                   src="/lovable-uploads/0eca3ff3-5e4a-4be9-881d-e839832a5b13.png" 
                   alt="We Do Hockey Logo" 
                   className="w-56 h-56 object-contain"
                 />
               </div>
-              <div className="absolute -top-3 -right-3 w-8 h-8 bg-gradient-to-r from-orange-400 to-red-400 rounded-full flex items-center justify-center shadow-lg animate-bounce">
+              <div className="absolute -top-3 -right-3 w-8 h-8 bg-gradient-to-r from-orange-400 to-red-400 rounded-md flex items-center justify-center animate-bounce">
                 <Zap className="w-4 h-4 text-white" />
               </div>
-              <div className="absolute -bottom-2 -left-2 w-6 h-6 bg-gradient-to-r from-amber-400 to-orange-400 rounded-full flex items-center justify-center shadow-lg animate-pulse">
+              <div className="absolute -bottom-2 -left-2 w-6 h-6 bg-gradient-to-r from-amber-400 to-orange-400 rounded-md flex items-center justify-center animate-pulse">
                 <Star className="w-3 h-3 text-white" />
               </div>
             </div>
@@ -52,9 +52,9 @@ const Index = () => {
           </div>
         </div>
         
-        {/* Premium main card */}
-        <Card className="shadow-2xl border-0 bg-white/90 backdrop-blur-lg animate-scale-in hover:shadow-3xl transition-all duration-500 group">
-          <CardHeader className="pb-6 bg-gradient-to-r from-orange-50 via-red-50 to-amber-50 rounded-t-lg">
+        {/* Flatter main card */}
+        <Card className="border border-orange-200 bg-white/95 backdrop-blur-sm animate-scale-in hover:shadow-lg transition-all duration-300 group">
+          <CardHeader className="pb-6 bg-gradient-to-r from-orange-50 via-red-50 to-amber-50 rounded-t-md">
             <CardTitle className="text-center text-orange-800 text-2xl flex items-center justify-center gap-3 group-hover:scale-105 transition-transform duration-300">
               <Users className="w-7 h-7 animate-pulse" />
               Welcome Parents!
@@ -79,9 +79,9 @@ const Index = () => {
               </div>
             </div>
             
-            {/* Premium CTA button */}
+            {/* Flatter CTA button */}
             <Link to="/live-match" className="block">
-              <Button className="w-full bg-gradient-to-r from-orange-600 via-red-600 to-amber-600 hover:from-orange-700 hover:via-red-700 hover:to-amber-700 text-white py-6 text-xl font-bold shadow-2xl hover:shadow-3xl transform hover:-translate-y-2 transition-all duration-500 group relative overflow-hidden">
+              <Button className="w-full bg-gradient-to-r from-orange-600 via-red-600 to-amber-600 hover:from-orange-700 hover:via-red-700 hover:to-amber-700 text-white py-6 text-xl font-bold shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
                 <Play className="w-6 h-6 mr-3 group-hover:scale-125 transition-transform duration-300" />
                 🏑 Follow Live Match
@@ -89,24 +89,24 @@ const Index = () => {
               </Button>
             </Link>
             
-            {/* Enhanced feature highlights with new colors */}
-            <div className="grid grid-cols-3 gap-6 pt-6 border-t border-gradient-to-r from-transparent via-gray-200 to-transparent">
-              <div className="text-center group hover:scale-110 transition-transform duration-300">
-                <div className="w-14 h-14 bg-gradient-to-br from-orange-100 to-red-200 rounded-full flex items-center justify-center mx-auto mb-3 shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+            {/* Flatter feature highlights */}
+            <div className="grid grid-cols-3 gap-6 pt-6 border-t border-gray-200">
+              <div className="text-center group hover:scale-105 transition-transform duration-300">
+                <div className="w-14 h-14 bg-gradient-to-br from-orange-100 to-red-200 rounded-md flex items-center justify-center mx-auto mb-3 group-hover:shadow-md transition-shadow duration-300">
                   <Trophy className="w-7 h-7 text-orange-600 group-hover:animate-bounce" />
                 </div>
                 <p className="text-sm text-gray-700 font-bold">Live Scores</p>
                 <p className="text-xs text-gray-500 mt-1">Real-time updates</p>
               </div>
-              <div className="text-center group hover:scale-110 transition-transform duration-300">
-                <div className="w-14 h-14 bg-gradient-to-br from-red-100 to-amber-200 rounded-full flex items-center justify-center mx-auto mb-3 shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+              <div className="text-center group hover:scale-105 transition-transform duration-300">
+                <div className="w-14 h-14 bg-gradient-to-br from-red-100 to-amber-200 rounded-md flex items-center justify-center mx-auto mb-3 group-hover:shadow-md transition-shadow duration-300">
                   <Zap className="w-7 h-7 text-red-600 group-hover:animate-pulse" />
                 </div>
                 <p className="text-sm text-gray-700 font-bold">Lightning Fast</p>
                 <p className="text-xs text-gray-500 mt-1">Instant notifications</p>
               </div>
-              <div className="text-center group hover:scale-110 transition-transform duration-300">
-                <div className="w-14 h-14 bg-gradient-to-br from-amber-100 to-orange-200 rounded-full flex items-center justify-center mx-auto mb-3 shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+              <div className="text-center group hover:scale-105 transition-transform duration-300">
+                <div className="w-14 h-14 bg-gradient-to-br from-amber-100 to-orange-200 rounded-md flex items-center justify-center mx-auto mb-3 group-hover:shadow-md transition-shadow duration-300">
                   <Users className="w-7 h-7 text-amber-600 group-hover:animate-bounce" />
                 </div>
                 <p className="text-sm text-gray-700 font-bold">Share & Connect</p>
@@ -114,10 +114,10 @@ const Index = () => {
               </div>
             </div>
             
-            {/* Premium info box */}
-            <div className="mt-8 p-6 bg-gradient-to-r from-amber-50 via-orange-50 to-red-50 rounded-xl border-2 border-amber-200 shadow-inner">
+            {/* Flatter info box */}
+            <div className="mt-8 p-6 bg-gradient-to-r from-amber-50 via-orange-50 to-red-50 rounded-md border border-amber-200">
               <div className="flex items-center justify-center space-x-3 mb-3">
-                <div className="w-8 h-8 bg-gradient-to-r from-amber-400 to-orange-400 rounded-full flex items-center justify-center">
+                <div className="w-8 h-8 bg-gradient-to-r from-amber-400 to-orange-400 rounded-md flex items-center justify-center">
                   <span className="text-white font-bold">🔑</span>
                 </div>
                 <h3 className="font-bold text-gray-800 text-lg">Quick Start Guide</h3>
@@ -126,7 +126,7 @@ const Index = () => {
                 Get your unique match key from your coach to start following the game in real-time!
               </p>
               <div className="mt-4 flex justify-center">
-                <div className="px-4 py-2 bg-white rounded-lg shadow-sm border border-amber-300">
+                <div className="px-4 py-2 bg-white rounded-md border border-amber-300">
                   <span className="text-sm text-gray-600 font-mono">Example: ABC123</span>
                 </div>
               </div>
