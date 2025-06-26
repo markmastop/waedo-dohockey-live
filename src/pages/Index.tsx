@@ -100,7 +100,7 @@ const Index = () => {
                 <div className="w-14 h-14 bg-gradient-to-br from-orange-100 to-yellow-200 rounded-full flex items-center justify-center mx-auto mb-3 shadow-lg group-hover:shadow-xl transition-shadow duration-300">
                   <Users className="w-7 h-7 text-orange-600 group-hover:animate-bounce" />
                 </div>
-                <p className="text-sm text-gray-700 font-bold">Share & Connect</p>
+                <p className="text-sm text-gray-700 font-bold">Share &amp; Connect</p>
                 <p className="text-xs text-gray-500 mt-1">With other parents</p>
               </div>
             </div>
