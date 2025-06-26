@@ -25,12 +25,12 @@ const Index = () => {
         <div className="text-center animate-fade-in">
           <div className="mb-8 flex justify-center">
             <div className="relative group">
-              {/* Clean logo without box */}
-              <div className="w-64 h-64 flex items-center justify-center transform hover:scale-105 transition-all duration-300">
+              {/* Clean logo without box - made twice as big */}
+              <div className="w-[512px] h-[512px] flex items-center justify-center transform hover:scale-105 transition-all duration-300">
                 <img 
                   src="/lovable-uploads/0eca3ff3-5e4a-4be9-881d-e839832a5b13.png" 
                   alt="We Do Hockey Logo" 
-                  className="w-56 h-56 object-contain"
+                  className="w-[512px] h-[512px] object-contain"
                 />
               </div>
               <div className="absolute -top-3 -right-3 w-8 h-8 bg-gradient-to-r from-orange-400 to-red-400 rounded-md flex items-center justify-center animate-bounce">
