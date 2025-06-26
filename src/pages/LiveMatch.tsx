@@ -30,6 +30,7 @@ const LiveMatch = () => {
   const [matchData, setMatchData] = useState<LiveMatchData | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [showMatchKeyInput, setShowMatchKeyInput] = useState(true);
 
   const fetchMatchData = async (key: string) => {
     if (!key.trim()) return;
@@ -63,6 +64,7 @@ const LiveMatch = () => {
 
       setMatchData(data);
       setSearchParams({ key: key.trim().toUpperCase() });
+      setShowMatchKeyInput(false);
     } catch (err) {
       console.error('Fetch error:', err);
       setError('An unexpected error occurred.');
@@ -122,13 +124,27 @@ const LiveMatch = () => {
       <div className="max-w-lg mx-auto space-y-8">
         <LiveMatchHeader />
 
-        <MatchKeyInput
-          matchKey={matchKey}
-          setMatchKey={setMatchKey}
-          onSubmit={fetchMatchData}
-          loading={loading}
-          error={error}
-        />
+        {showMatchKeyInput ? (
+          <MatchKeyInput
+            matchKey={matchKey}
+            setMatchKey={setMatchKey}
+            onSubmit={fetchMatchData}
+            loading={loading}
+            error={error}
+          />
+        ) : (
+          matchData && (
+            <div className="flex items-center justify-between bg-white border border-gray-200 rounded-md p-4 shadow-md">
+              <span className="font-mono text-gray-700">Match Key: {matchData.match_key}</span>
+              <button
+                className="text-sm text-gray-600 underline"
+                onClick={() => setShowMatchKeyInput(true)}
+              >
+                Change
+              </button>
+            </div>
+          )
+        )}
 
         {matchData && (
           <div className="space-y-8 animate-fade-in">
