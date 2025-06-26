@@ -2,79 +2,125 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
-import { Play, Users, Trophy, Zap } from "lucide-react";
+import { Play, Users, Trophy, Zap, Sparkles, Star } from "lucide-react";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50 flex items-center justify-center p-4 relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%2322c55e" fill-opacity="0.03"%3E%3Ccircle cx="30" cy="30" r="4"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-30"></div>
+      {/* Animated background patterns */}
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%2322c55e\" fill-opacity=\"0.03\"%3E%3Ccircle cx=\"30\" cy=\"30\" r=\"4\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-30 animate-pulse"></div>
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\"40\" height=\"40\" viewBox=\"0 0 40 40\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"%2322c55e\" fill-opacity=\"0.02\"%3E%3Cpath d=\"M20 20c0 11.046-8.954 20-20 20v20h40V20H20z\"/%3E%3C/g%3E%3C/svg%3E')] animate-fade-in"></div>
+      
+      {/* Floating elements */}
+      <div className="absolute top-20 left-10 w-4 h-4 bg-green-400 rounded-full animate-bounce opacity-60"></div>
+      <div className="absolute top-40 right-20 w-6 h-6 bg-emerald-300 rounded-full animate-pulse opacity-40"></div>
+      <div className="absolute bottom-32 left-20 w-5 h-5 bg-teal-400 rounded-full animate-bounce opacity-50" style={{ animationDelay: '1s' }}></div>
       
       <div className="max-w-md w-full space-y-8 relative z-10">
-        {/* Header with animation */}
+        {/* Enhanced header with premium styling */}
         <div className="text-center animate-fade-in">
-          <div className="mb-6 flex justify-center">
-            <div className="relative">
-              <div className="w-20 h-20 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center shadow-lg transform hover:scale-110 transition-transform duration-300">
-                <span className="text-3xl">🏑</span>
+          <div className="mb-8 flex justify-center">
+            <div className="relative group">
+              <div className="w-24 h-24 bg-gradient-to-br from-green-400 via-emerald-500 to-teal-500 rounded-full flex items-center justify-center shadow-2xl transform hover:scale-110 transition-all duration-500 group-hover:rotate-12">
+                <span className="text-4xl animate-pulse">🏑</span>
               </div>
-              <div className="absolute -top-2 -right-2 w-6 h-6 bg-orange-400 rounded-full flex items-center justify-center">
-                <Zap className="w-3 h-3 text-white" />
+              <div className="absolute -top-3 -right-3 w-8 h-8 bg-gradient-to-r from-orange-400 to-red-400 rounded-full flex items-center justify-center shadow-lg animate-bounce">
+                <Zap className="w-4 h-4 text-white" />
+              </div>
+              <div className="absolute -bottom-2 -left-2 w-6 h-6 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full flex items-center justify-center shadow-lg animate-pulse">
+                <Star className="w-3 h-3 text-white" />
               </div>
             </div>
           </div>
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-green-700 to-emerald-600 bg-clip-text text-transparent mb-3">
+          <h1 className="text-5xl font-bold bg-gradient-to-r from-green-700 via-emerald-600 to-teal-600 bg-clip-text text-transparent mb-4 animate-gradient-x">
             Field Hockey Live
           </h1>
-          <p className="text-green-600 text-lg font-medium">Follow your team's matches in real-time</p>
+          <p className="text-green-600 text-xl font-semibold mb-2">Follow your team&apos;s matches in real-time</p>
+          <div className="flex justify-center space-x-2 mb-6">
+            <Sparkles className="w-5 h-5 text-yellow-500 animate-pulse" />
+            <span className="text-sm text-gray-600 font-medium">Premium live tracking experience</span>
+            <Sparkles className="w-5 h-5 text-yellow-500 animate-pulse" />
+          </div>
         </div>
         
-        {/* Main card with enhanced styling */}
-        <Card className="shadow-2xl border-0 bg-white/80 backdrop-blur-sm animate-scale-in">
-          <CardHeader className="pb-4">
-            <CardTitle className="text-center text-green-800 text-xl flex items-center justify-center gap-2">
-              <Users className="w-6 h-6" />
+        {/* Premium main card */}
+        <Card className="shadow-2xl border-0 bg-white/90 backdrop-blur-lg animate-scale-in hover:shadow-3xl transition-all duration-500 group">
+          <CardHeader className="pb-6 bg-gradient-to-r from-green-50 via-emerald-50 to-teal-50 rounded-t-lg">
+            <CardTitle className="text-center text-green-800 text-2xl flex items-center justify-center gap-3 group-hover:scale-105 transition-transform duration-300">
+              <Users className="w-7 h-7 animate-pulse" />
               Welcome Parents!
+              <Trophy className="w-6 h-6 text-yellow-600" />
             </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-6">
-            <p className="text-gray-600 text-center leading-relaxed">
-              Stay connected with your child's field hockey matches. Get live scores, 
-              match updates, and never miss a moment of the action.
-            </p>
-            
-            {/* Enhanced button */}
-            <Link to="/live-match" className="block">
-              <Button className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white py-4 text-lg font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 group">
-                <Play className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
-                📱 Follow Live Match
-              </Button>
-            </Link>
-            
-            {/* Feature highlights */}
-            <div className="grid grid-cols-3 gap-4 pt-4 border-t border-gray-100">
-              <div className="text-center">
-                <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                  <Trophy className="w-5 h-5 text-green-600" />
+          <CardContent className="space-y-8 p-8">
+            <div className="text-center space-y-4">
+              <p className="text-gray-700 text-lg leading-relaxed font-medium">
+                Stay connected with your child&apos;s field hockey matches. Get live scores, 
+                match updates, and never miss a moment of the action.
+              </p>
+              <div className="flex justify-center space-x-4">
+                <div className="flex items-center space-x-2 text-green-600">
+                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                  <span className="text-sm font-semibold">Live Updates</span>
                 </div>
-                <p className="text-xs text-gray-600 font-medium">Live Scores</p>
-              </div>
-              <div className="text-center">
-                <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                  <Zap className="w-5 h-5 text-blue-600" />
+                <div className="flex items-center space-x-2 text-blue-600">
+                  <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
+                  <span className="text-sm font-semibold">Real-time Scores</span>
                 </div>
-                <p className="text-xs text-gray-600 font-medium">Real-time</p>
-              </div>
-              <div className="text-center">
-                <div className="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                  <Users className="w-5 h-5 text-orange-600" />
-                </div>
-                <p className="text-xs text-gray-600 font-medium">Share</p>
               </div>
             </div>
             
-            <div className="text-xs text-gray-500 text-center mt-6 p-3 bg-gray-50 rounded-lg">
-              <p className="font-medium">🔑 Get your match key from your coach to start following the game</p>
+            {/* Premium CTA button */}
+            <Link to="/live-match" className="block">
+              <Button className="w-full bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 hover:from-green-700 hover:via-emerald-700 hover:to-teal-700 text-white py-6 text-xl font-bold shadow-2xl hover:shadow-3xl transform hover:-translate-y-2 transition-all duration-500 group relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                <Play className="w-6 h-6 mr-3 group-hover:scale-125 transition-transform duration-300" />
+                📱 Follow Live Match
+                <Sparkles className="w-5 h-5 ml-3 animate-pulse" />
+              </Button>
+            </Link>
+            
+            {/* Enhanced feature highlights with animations */}
+            <div className="grid grid-cols-3 gap-6 pt-6 border-t border-gradient-to-r from-transparent via-gray-200 to-transparent">
+              <div className="text-center group hover:scale-110 transition-transform duration-300">
+                <div className="w-14 h-14 bg-gradient-to-br from-green-100 to-emerald-200 rounded-full flex items-center justify-center mx-auto mb-3 shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+                  <Trophy className="w-7 h-7 text-green-600 group-hover:animate-bounce" />
+                </div>
+                <p className="text-sm text-gray-700 font-bold">Live Scores</p>
+                <p className="text-xs text-gray-500 mt-1">Real-time updates</p>
+              </div>
+              <div className="text-center group hover:scale-110 transition-transform duration-300">
+                <div className="w-14 h-14 bg-gradient-to-br from-blue-100 to-cyan-200 rounded-full flex items-center justify-center mx-auto mb-3 shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+                  <Zap className="w-7 h-7 text-blue-600 group-hover:animate-pulse" />
+                </div>
+                <p className="text-sm text-gray-700 font-bold">Lightning Fast</p>
+                <p className="text-xs text-gray-500 mt-1">Instant notifications</p>
+              </div>
+              <div className="text-center group hover:scale-110 transition-transform duration-300">
+                <div className="w-14 h-14 bg-gradient-to-br from-orange-100 to-yellow-200 rounded-full flex items-center justify-center mx-auto mb-3 shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+                  <Users className="w-7 h-7 text-orange-600 group-hover:animate-bounce" />
+                </div>
+                <p className="text-sm text-gray-700 font-bold">Share & Connect</p>
+                <p className="text-xs text-gray-500 mt-1">With other parents</p>
+              </div>
+            </div>
+            
+            {/* Premium info box */}
+            <div className="mt-8 p-6 bg-gradient-to-r from-yellow-50 via-orange-50 to-red-50 rounded-xl border-2 border-yellow-200 shadow-inner">
+              <div className="flex items-center justify-center space-x-3 mb-3">
+                <div className="w-8 h-8 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full flex items-center justify-center">
+                  <span className="text-white font-bold">🔑</span>
+                </div>
+                <h3 className="font-bold text-gray-800 text-lg">Quick Start Guide</h3>
+              </div>
+              <p className="text-gray-700 text-center font-semibold leading-relaxed">
+                Get your unique match key from your coach to start following the game in real-time!
+              </p>
+              <div className="mt-4 flex justify-center">
+                <div className="px-4 py-2 bg-white rounded-lg shadow-sm border border-yellow-300">
+                  <span className="text-sm text-gray-600 font-mono">Example: ABC123</span>
+                </div>
+              </div>
             </div>
           </CardContent>
         </Card>

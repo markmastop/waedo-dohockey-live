@@ -306,41 +306,33 @@ export type Database = {
       }
       news_items: {
         Row: {
+          app_version: string
           created_at: string
           description: string
           id: string
           release_type: string
           title: string
           updated_at: string
-          version_id: string | null
         }
         Insert: {
+          app_version?: string
           created_at?: string
           description: string
           id?: string
           release_type: string
           title: string
           updated_at?: string
-          version_id?: string | null
         }
         Update: {
+          app_version?: string
           created_at?: string
           description?: string
           id?: string
           release_type?: string
           title?: string
           updated_at?: string
-          version_id?: string | null
         }
-        Relationships: [
-          {
-            foreignKeyName: "news_items_version_id_fkey"
-            columns: ["version_id"]
-            isOneToOne: false
-            referencedRelation: "app_versions"
-            referencedColumns: ["id"]
-          },
-        ]
+        Relationships: []
       }
       profiles: {
         Row: {
