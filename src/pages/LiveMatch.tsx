@@ -149,8 +149,12 @@ const LiveMatch = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50 p-4 relative overflow-hidden">
       {/* Enhanced animated background patterns */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\"40\" height=\"40\" viewBox=\"0 0 40 40\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"%2322c55e\" fill-opacity=\"0.02\"%3E%3Cpath d=\"M20 20c0 11.046-8.954 20-20 20v20h40V20H20z\"/%3E%3C/g%3E%3C/svg%3E')] animate-pulse"></div>
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%2322c55e\" fill-opacity=\"0.03\"%3E%3Ccircle cx=\"30\" cy=\"30\" r=\"4\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-30"></div>
+      <div className="absolute inset-0 animate-pulse">
+        <div className="w-full h-full bg-gradient-to-r from-green-100/20 to-emerald-100/20"></div>
+      </div>
+      <div className="absolute inset-0 opacity-30">
+        <div className="w-full h-full bg-gradient-to-l from-teal-100/10 to-green-100/10"></div>
+      </div>
       
       {/* Floating elements */}
       <div className="absolute top-16 left-8 w-3 h-3 bg-green-400 rounded-full animate-bounce opacity-60"></div>
