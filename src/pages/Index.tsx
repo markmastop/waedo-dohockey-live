@@ -7,7 +7,7 @@ import { Play, Users, Trophy, Zap, Sparkles, Star } from "lucide-react";
 const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 via-red-50 to-amber-50 flex items-center justify-center p-4 relative overflow-hidden">
-      {/* Animated background patterns */}
+      {/* Enhanced animated background patterns */}
       <div className="absolute inset-0 opacity-30 animate-pulse">
         <div className="w-full h-full bg-gradient-to-r from-orange-100/20 to-red-100/20"></div>
       </div>
@@ -21,16 +21,16 @@ const Index = () => {
       <div className="absolute bottom-32 left-20 w-5 h-5 bg-amber-400 rounded-full animate-bounce opacity-50" style={{ animationDelay: '1s' }}></div>
       
       <div className="max-w-md w-full space-y-8 relative z-10">
-        {/* Enhanced header with logo */}
+        {/* Enhanced header with bigger logo */}
         <div className="text-center animate-fade-in">
           <div className="mb-8 flex justify-center">
             <div className="relative group">
-              {/* Logo integration */}
-              <div className="w-32 h-32 bg-white rounded-3xl flex items-center justify-center shadow-2xl transform hover:scale-110 transition-all duration-500 group-hover:rotate-3 border-4 border-orange-200">
+              {/* Much bigger logo to match text size */}
+              <div className="w-64 h-64 bg-white rounded-3xl flex items-center justify-center shadow-2xl transform hover:scale-110 transition-all duration-500 group-hover:rotate-3 border-4 border-orange-200">
                 <img 
                   src="/lovable-uploads/0eca3ff3-5e4a-4be9-881d-e839832a5b13.png" 
                   alt="We Do Hockey Logo" 
-                  className="w-28 h-28 object-contain"
+                  className="w-56 h-56 object-contain"
                 />
               </div>
               <div className="absolute -top-3 -right-3 w-8 h-8 bg-gradient-to-r from-orange-400 to-red-400 rounded-full flex items-center justify-center shadow-lg animate-bounce">
