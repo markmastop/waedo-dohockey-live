@@ -2,13 +2,14 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
-import { Clock, Target, Users, Play, Pause, Square, Share2, Sparkles, Trophy, Zap, Star } from 'lucide-react';
 import { toast } from 'sonner';
+import LiveMatchHeader from '@/components/LiveMatch/LiveMatchHeader';
+import MatchKeyInput from '@/components/LiveMatch/MatchKeyInput';
+import MatchStatus from '@/components/LiveMatch/MatchStatus';
+import LiveScoreboard from '@/components/LiveMatch/LiveScoreboard';
+import LastEvent from '@/components/LiveMatch/LastEvent';
+import ShareButton from '@/components/LiveMatch/ShareButton';
+import InstructionsCard from '@/components/LiveMatch/InstructionsCard';
 
 interface LiveMatchData {
   id: string;
@@ -30,30 +31,6 @@ const LiveMatch = () => {
   const [matchData, setMatchData] = useState<LiveMatchData | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
-  const formatTime = (seconds: number) => {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
-  };
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'live': return 'bg-gradient-to-r from-green-500 to-emerald-500 animate-pulse';
-      case 'paused': return 'bg-gradient-to-r from-yellow-500 to-orange-500';
-      case 'finished': return 'bg-gradient-to-r from-gray-500 to-slate-500';
-      default: return 'bg-gradient-to-r from-blue-500 to-cyan-500';
-    }
-  };
-
-  const getStatusIcon = (status: string) => {
-    switch (status) {
-      case 'live': return <Play className="w-4 h-4 animate-pulse" />;
-      case 'paused': return <Pause className="w-4 h-4" />;
-      case 'finished': return <Square className="w-4 h-4" />;
-      default: return <Clock className="w-4 h-4" />;
-    }
-  };
 
   const fetchMatchData = async (key: string) => {
     if (!key.trim()) return;
@@ -94,11 +71,6 @@ const LiveMatch = () => {
     } finally {
       setLoading(false);
     }
-  };
-
-  const handleKeySubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    fetchMatchData(matchKey);
   };
 
   // Set up real-time subscription
@@ -162,242 +134,41 @@ const LiveMatch = () => {
       <div className="absolute bottom-24 left-12 w-5 h-5 bg-teal-400 rounded-full animate-bounce opacity-50" style={{ animationDelay: '1s' }}></div>
       
       <div className="max-w-lg mx-auto space-y-8 relative z-10">
-        {/* Premium Header */}
-        <div className="text-center py-8 animate-fade-in">
-          <div className="flex items-center justify-center gap-4 mb-6">
-            <div className="relative group">
-              <div className="w-16 h-16 bg-gradient-to-br from-green-400 via-emerald-500 to-teal-500 rounded-full flex items-center justify-center shadow-2xl group-hover:scale-110 transition-all duration-500">
-                <span className="text-3xl animate-pulse">🏑</span>
-              </div>
-              <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-r from-red-400 to-orange-400 rounded-full flex items-center justify-center animate-bounce">
-                <Zap className="w-3 h-3 text-white" />
-              </div>
-            </div>
-            <div>
-              <h1 className="text-4xl font-bold bg-gradient-to-r from-green-700 via-emerald-600 to-teal-600 bg-clip-text text-transparent animate-gradient-x">
-                Live Match
-              </h1>
-              <div className="flex items-center justify-center space-x-2 mt-2">
-                <Star className="w-4 h-4 text-yellow-500" />
-                <span className="text-green-600 font-semibold">Real-time Updates</span>
-                <Star className="w-4 h-4 text-yellow-500" />
-              </div>
-            </div>
-          </div>
-          <p className="text-green-600 font-semibold text-lg">Follow your team&apos;s game in real-time</p>
-        </div>
+        <LiveMatchHeader />
 
-        {/* Premium Match Key Input */}
-        <Card className="shadow-2xl border-0 bg-white/95 backdrop-blur-lg animate-scale-in hover:shadow-3xl transition-all duration-500">
-          <CardHeader className="pb-6 bg-gradient-to-r from-green-50 via-emerald-50 to-teal-50 rounded-t-lg">
-            <CardTitle className="text-xl flex items-center gap-3 text-green-800 justify-center">
-              <Target className="w-6 h-6 animate-pulse" />
-              Enter Match Key
-              <Sparkles className="w-5 h-5 text-yellow-500" />
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="p-8">
-            <form onSubmit={handleKeySubmit} className="space-y-6">
-              <div className="relative group">
-                <Input
-                  type="text"
-                  placeholder="Enter match key (e.g., ABC123)"
-                  value={matchKey}
-                  onChange={(e) => setMatchKey(e.target.value.toUpperCase())}
-                  className="text-center text-xl font-mono border-2 border-green-200 focus:border-green-400 transition-all duration-300 py-4 bg-gradient-to-r from-white to-green-50 group-hover:shadow-lg"
-                  maxLength={10}
-                />
-                <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
-                  <Sparkles className="w-5 h-5 text-green-400 animate-pulse" />
-                </div>
-              </div>
-              <Button 
-                type="submit" 
-                className="w-full bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 hover:from-green-700 hover:via-emerald-700 hover:to-teal-700 shadow-2xl hover:shadow-3xl transform hover:-translate-y-1 transition-all duration-500 py-4 text-lg font-bold relative overflow-hidden group"
-                disabled={loading || !matchKey.trim()}
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-                {loading ? (
-                  <div className="flex items-center gap-3">
-                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                    Loading Match...
-                  </div>
-                ) : (
-                  <div className="flex items-center gap-3">
-                    <Play className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                    Follow Match
-                    <Trophy className="w-5 h-5" />
-                  </div>
-                )}
-              </Button>
-            </form>
-            {error && (
-              <div className="mt-6 p-6 bg-gradient-to-r from-red-50 to-pink-50 border-2 border-red-200 rounded-xl animate-fade-in shadow-lg">
-                <div className="flex items-center space-x-3">
-                  <div className="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center">
-                    <span className="text-white font-bold">!</span>
-                  </div>
-                  <p className="text-red-600 font-semibold">{error}</p>
-                </div>
-              </div>
-            )}
-          </CardContent>
-        </Card>
+        <MatchKeyInput
+          matchKey={matchKey}
+          setMatchKey={setMatchKey}
+          onSubmit={fetchMatchData}
+          loading={loading}
+          error={error}
+        />
 
-        {/* Premium Live Match Data */}
         {matchData && (
           <div className="space-y-8 animate-fade-in">
-            {/* Enhanced Status Badge */}
-            <div className="flex justify-center">
-              <Badge className={`${getStatusColor(matchData.status)} text-white px-8 py-4 text-lg font-bold shadow-2xl`}>
-                <div className="flex items-center gap-3">
-                  {getStatusIcon(matchData.status)}
-                  <span className="capitalize">{matchData.status.replace('_', ' ')}</span>
-                  {matchData.status === 'live' && <Zap className="w-4 h-4 animate-pulse" />}
-                </div>
-              </Badge>
-            </div>
+            <MatchStatus status={matchData.status} />
 
-            {/* Premium Scoreboard */}
-            <Card className="shadow-3xl border-0 bg-gradient-to-br from-white via-green-50/30 to-emerald-50/30 backdrop-blur-lg animate-scale-in hover:shadow-4xl transition-all duration-500">
-              <CardContent className="p-10">
-                <div className="grid grid-cols-3 items-center gap-8">
-                  {/* Home Team */}
-                  <div className="text-center group">
-                    <div className="text-6xl font-bold bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 bg-clip-text text-transparent mb-4 animate-pulse hover:scale-110 transition-transform duration-300">
-                      {matchData.home_score}
-                    </div>
-                    <div className="text-lg font-bold text-gray-700 break-words px-2">
-                      {matchData.home_team}
-                    </div>
-                    <div className="mt-2 w-12 h-1 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full mx-auto"></div>
-                  </div>
+            <LiveScoreboard
+              homeTeam={matchData.home_team}
+              awayTeam={matchData.away_team}
+              homeScore={matchData.home_score}
+              awayScore={matchData.away_score}
+              currentQuarter={matchData.current_quarter}
+              matchTime={matchData.match_time}
+            />
 
-                  {/* VS Separator with premium styling */}
-                  <div className="text-center">
-                    <div className="relative">
-                      <div className="text-gray-400 text-2xl font-bold animate-pulse">VS</div>
-                      <div className="absolute -top-2 -left-2 w-8 h-8 border-2 border-green-300 rounded-full animate-spin opacity-30"></div>
-                      <div className="absolute -bottom-2 -right-2 w-6 h-6 border-2 border-emerald-300 rounded-full animate-ping opacity-20"></div>
-                    </div>
-                  </div>
-
-                  {/* Away Team */}
-                  <div className="text-center group">
-                    <div className="text-6xl font-bold bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 bg-clip-text text-transparent mb-4 animate-pulse hover:scale-110 transition-transform duration-300">
-                      {matchData.away_score}
-                    </div>
-                    <div className="text-lg font-bold text-gray-700 break-words px-2">
-                      {matchData.away_team}
-                    </div>
-                    <div className="mt-2 w-12 h-1 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full mx-auto"></div>
-                  </div>
-                </div>
-
-                <Separator className="my-8 bg-gradient-to-r from-transparent via-green-300 to-transparent h-0.5" />
-
-                {/* Enhanced Match Info */}
-                <div className="grid grid-cols-2 gap-8">
-                  <div className="flex items-center gap-4 p-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-                    <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center shadow-lg">
-                      <Clock className="w-6 h-6 text-white" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-gray-600 font-medium">Match Time</p>
-                      <p className="text-xl font-bold text-gray-800">{formatTime(matchData.match_time)}</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-4 p-4 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-                    <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center shadow-lg">
-                      <Users className="w-6 h-6 text-white" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-gray-600 font-medium">Current Quarter</p>
-                      <p className="text-xl font-bold text-gray-800">{matchData.current_quarter}</p>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Premium Last Event */}
             {matchData.last_event && (
-              <Card className="shadow-2xl border-0 bg-gradient-to-r from-orange-50 via-amber-50 to-yellow-50 animate-fade-in hover:shadow-3xl transition-all duration-500">
-                <CardHeader className="pb-4">
-                  <CardTitle className="text-lg text-orange-800 flex items-center gap-3">
-                    <div className="w-8 h-8 bg-gradient-to-r from-orange-400 to-amber-400 rounded-full flex items-center justify-center">
-                      <Sparkles className="w-4 h-4 text-white animate-pulse" />
-                    </div>
-                    Latest Event
-                    <div className="ml-auto text-xs bg-orange-200 px-3 py-1 rounded-full">NEW</div>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="pt-0">
-                  <div className="bg-white/70 backdrop-blur-sm rounded-lg p-6 border border-orange-200">
-                    <p className="text-lg text-orange-800 font-bold mb-3">
-                      {matchData.last_event}
-                    </p>
-                    {matchData.last_event_time && (
-                      <p className="text-sm text-orange-600 font-medium">
-                        {new Date(matchData.last_event_time).toLocaleTimeString()}
-                      </p>
-                    )}
-                  </div>
-                </CardContent>
-              </Card>
+              <LastEvent
+                event={matchData.last_event}
+                eventTime={matchData.last_event_time}
+              />
             )}
 
-            {/* Premium Share Button */}
-            <Card className="shadow-2xl border-0 bg-white/90 backdrop-blur-lg hover:shadow-3xl transition-all duration-500">
-              <CardContent className="p-6">
-                <Button
-                  onClick={() => {
-                    const url = `${window.location.origin}/live-match?key=${matchData.match_key}`;
-                    navigator.clipboard.writeText(url);
-                    toast.success('Match link copied to clipboard!');
-                  }}
-                  variant="outline"
-                  className="w-full border-2 border-green-300 hover:bg-gradient-to-r hover:from-green-50 hover:to-emerald-50 transition-all duration-500 group py-4 text-lg font-semibold relative overflow-hidden"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-green-100 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-                  <Share2 className="w-5 h-5 mr-3 group-hover:scale-125 transition-transform duration-300" />
-                  📱 Share Match Link
-                  <Sparkles className="w-5 h-5 ml-3 text-yellow-500" />
-                </Button>
-              </CardContent>
-            </Card>
+            <ShareButton matchKey={matchData.match_key} />
           </div>
         )}
 
-        {/* Premium Instructions */}
-        <Card className="shadow-2xl border-0 bg-gradient-to-br from-blue-50 via-cyan-50 to-teal-50 animate-fade-in hover:shadow-3xl transition-all duration-500">
-          <CardContent className="p-8">
-            <h3 className="font-bold text-blue-800 mb-6 flex items-center gap-3 text-xl">
-              <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center">
-                <Target className="w-5 h-5 text-white" />
-              </div>
-              How to follow a match:
-            </h3>
-            <div className="space-y-4">
-              {[
-                { step: 1, text: "Get the match key from your coach", icon: "🏑" },
-                { step: 2, text: "Enter it above and tap 'Follow Match'", icon: "⌨️" },
-                { step: 3, text: "Watch live updates automatically appear", icon: "⚡" },
-                { step: 4, text: "Share the link with other parents!", icon: "📱" }
-              ].map((item, index) => (
-                <div key={index} className="flex items-start gap-4 p-4 bg-white/60 backdrop-blur-sm rounded-lg hover:bg-white/80 transition-all duration-300 group">
-                  <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center text-white font-bold shadow-lg group-hover:scale-110 transition-transform duration-300">
-                    {item.step}
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-blue-700 font-semibold">{item.text}</p>
-                  </div>
-                  <div className="text-2xl">{item.icon}</div>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+        <InstructionsCard />
       </div>
     </div>
   );
