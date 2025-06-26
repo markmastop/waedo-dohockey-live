@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
@@ -119,19 +118,19 @@ const LiveMatch = () => {
   }, [searchParams]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50 p-4 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-red-50 to-amber-50 p-4 relative overflow-hidden">
       {/* Enhanced animated background patterns */}
       <div className="absolute inset-0 animate-pulse">
-        <div className="w-full h-full bg-gradient-to-r from-green-100/20 to-emerald-100/20"></div>
+        <div className="w-full h-full bg-gradient-to-r from-orange-100/20 to-red-100/20"></div>
       </div>
       <div className="absolute inset-0 opacity-30">
-        <div className="w-full h-full bg-gradient-to-l from-teal-100/10 to-green-100/10"></div>
+        <div className="w-full h-full bg-gradient-to-l from-amber-100/10 to-orange-100/10"></div>
       </div>
       
       {/* Floating elements */}
-      <div className="absolute top-16 left-8 w-3 h-3 bg-green-400 rounded-full animate-bounce opacity-60"></div>
-      <div className="absolute top-32 right-16 w-4 h-4 bg-emerald-300 rounded-full animate-pulse opacity-40"></div>
-      <div className="absolute bottom-24 left-12 w-5 h-5 bg-teal-400 rounded-full animate-bounce opacity-50" style={{ animationDelay: '1s' }}></div>
+      <div className="absolute top-16 left-8 w-3 h-3 bg-orange-400 rounded-full animate-bounce opacity-60"></div>
+      <div className="absolute top-32 right-16 w-4 h-4 bg-red-300 rounded-full animate-pulse opacity-40"></div>
+      <div className="absolute bottom-24 left-12 w-5 h-5 bg-amber-400 rounded-full animate-bounce opacity-50" style={{ animationDelay: '1s' }}></div>
       
       <div className="max-w-lg mx-auto space-y-8 relative z-10">
         <LiveMatchHeader />
