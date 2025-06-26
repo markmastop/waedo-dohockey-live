@@ -14,19 +14,18 @@ const InstructionsCard = () => {
         </h3>
         <div className="space-y-4">
           {[
-            { step: 1, text: "Get the match key from your coach", icon: "🏑" },
-            { step: 2, text: "Enter it above and tap 'Follow Match'", icon: "⌨️" },
-            { step: 3, text: "Watch live updates automatically appear", icon: "⚡" },
-            { step: 4, text: "Share the link with other parents!", icon: "📱" }
+            { step: 1, text: "Get the match key from your coach" },
+            { step: 2, text: "Enter it above and tap 'Follow Match'" },
+            { step: 3, text: "Watch live updates automatically appear" },
+            { step: 4, text: "Share the link with others!" }
           ].map((item, index) => (
-            <div key={index} className="flex items-start gap-4 p-4 bg-gray-50 rounded-lg">
+            <div key={index} className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg">
               <div className="flex-shrink-0 w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center text-gray-700 font-bold">
                 {item.step}
               </div>
               <div className="flex-1">
                 <p className="text-gray-700 font-semibold">{item.text}</p>
               </div>
-              <div className="text-2xl">{item.icon}</div>
             </div>
           ))}
         </div>
