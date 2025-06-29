@@ -10,6 +10,7 @@ import LastEvent from '@/components/LiveMatch/LastEvent';
 import ShareButton from '@/components/LiveMatch/ShareButton';
 import InstructionsCard from '@/components/LiveMatch/InstructionsCard';
 import EventsTimeline from '@/components/LiveMatch/EventsTimeline';
+import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { History } from 'lucide-react';
 
@@ -222,16 +223,20 @@ const LiveMatch = () => {
               />
             )}
 
-            {/* Events Timeline Button - Full width like other boxes */}
+            {/* Events Timeline Button - Same layout as Share button */}
             {events.length > 0 && !showEventsTimeline && (
-              <Button
-                variant="outline"
-                onClick={() => setShowEventsTimeline(true)}
-                className="w-full border border-gray-300 hover:bg-gray-50 text-gray-700 px-4 py-2 text-sm shadow-md"
-              >
-                <History className="w-4 h-4 mr-2" />
-                View All Events ({events.length})
-              </Button>
+              <Card className="shadow-md border border-gray-200 bg-white">
+                <CardContent className="p-4">
+                  <Button
+                    variant="outline"
+                    onClick={() => setShowEventsTimeline(true)}
+                    className="w-full border border-gray-300 hover:bg-gray-100 py-2 text-base font-semibold"
+                  >
+                    <History className="w-4 h-4 mr-2" />
+                    📋 View All Events ({events.length})
+                  </Button>
+                </CardContent>
+              </Card>
             )}
 
             {/* Events Timeline */}
