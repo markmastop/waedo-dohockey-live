@@ -1,4 +1,3 @@
-
 import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { Clock, Users } from 'lucide-react';
@@ -29,7 +28,8 @@ const LiveScoreboard = ({
   return (
     <Card className="shadow-md border border-gray-200 bg-white">
       <CardContent className="p-8">
-        <div className="grid grid-cols-3 items-center gap-8">
+        {/* Score Section - Aligned at top */}
+        <div className="grid grid-cols-3 items-start gap-8 mb-8">
           {/* Home Team */}
           <div className="text-center">
             <div className="text-6xl font-bold text-gray-900 mb-4">
