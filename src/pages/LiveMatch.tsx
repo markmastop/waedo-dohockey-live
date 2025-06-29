@@ -154,12 +154,12 @@ const LiveMatch = () => {
   const latestEventDescription = matchData ? getLatestEventDescription(matchData) : null;
 
   return (
-    <div className="min-h-screen bg-white p-6">
-      <div className="max-w-lg mx-auto space-y-8">
+    <div className="min-h-screen bg-white p-3">
+      <div className="max-w-lg mx-auto space-y-4">
         <LiveMatchHeader />
 
         {showMatchKeyInput ? (
-          <div className="mx-4">
+          <div className="mx-2">
             <MatchKeyInput
               matchKey={matchKey}
               setMatchKey={setMatchKey}
@@ -170,24 +170,24 @@ const LiveMatch = () => {
           </div>
         ) : (
           matchData && (
-            <div className="mx-4">
-              <div className="flex items-center justify-between bg-white border border-gray-200 rounded-md p-4 shadow-md">
-                <div className="flex items-center gap-3">
+            <div className="mx-2">
+              <div className="flex items-center justify-between bg-white border border-gray-200 rounded-md p-3 shadow-md">
+                <div className="flex items-center gap-2">
                   {matchData.club_logo_url && (
                     <img
                       src={matchData.club_logo_url}
                       alt="Club Logo"
-                      className="w-8 h-8 object-contain rounded"
+                      className="w-6 h-6 object-contain rounded"
                       onError={(e) => {
                         // Hide image if it fails to load
                         e.currentTarget.style.display = 'none';
                       }}
                     />
                   )}
-                  <span className="font-mono text-gray-700">Match Key: {matchData.match_key}</span>
+                  <span className="font-mono text-sm text-gray-700">Match Key: {matchData.match_key}</span>
                 </div>
                 <button
-                  className="text-sm text-gray-600 underline"
+                  className="text-xs text-gray-600 underline"
                   onClick={() => setShowMatchKeyInput(true)}
                 >
                   Change
@@ -198,7 +198,7 @@ const LiveMatch = () => {
         )}
 
         {matchData && (
-          <div className="space-y-8 animate-fade-in mx-4">
+          <div className="space-y-4 animate-fade-in mx-2">
             <MatchStatus status={matchData.status} />
 
             <LiveScoreboard
@@ -221,7 +221,7 @@ const LiveMatch = () => {
           </div>
         )}
 
-        <div className="mx-4">
+        <div className="mx-2">
           <InstructionsCard />
         </div>
       </div>

@@ -1,4 +1,3 @@
-
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Share2, Sparkles } from 'lucide-react';
@@ -17,15 +16,15 @@ const ShareButton = ({ matchKey }: ShareButtonProps) => {
 
   return (
     <Card className="shadow-md border border-gray-200 bg-white">
-      <CardContent className="p-6">
+      <CardContent className="p-4">
         <Button
           onClick={handleShare}
           variant="outline"
-          className="w-full border border-gray-300 hover:bg-gray-100 py-3 text-lg font-semibold"
+          className="w-full border border-gray-300 hover:bg-gray-100 py-2 text-base font-semibold"
         >
-          <Share2 className="w-5 h-5 mr-3" />
+          <Share2 className="w-4 h-4 mr-2" />
           📱 Share Match Link
-          <Sparkles className="w-5 h-5 ml-3 text-gray-500" />
+          <Sparkles className="w-4 h-4 ml-2 text-gray-500" />
         </Button>
       </CardContent>
     </Card>

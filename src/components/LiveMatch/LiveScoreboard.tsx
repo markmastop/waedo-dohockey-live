@@ -27,55 +27,55 @@ const LiveScoreboard = ({
 
   return (
     <Card className="shadow-md border border-gray-200 bg-white">
-      <CardContent className="p-8">
+      <CardContent className="p-6">
         {/* Score Section - Aligned at top */}
-        <div className="grid grid-cols-3 items-start gap-8 mb-8">
+        <div className="grid grid-cols-3 items-start gap-6 mb-6">
           {/* Home Team */}
           <div className="text-center">
-            <div className="text-6xl font-bold text-gray-900 mb-4">
+            <div className="text-4xl font-bold text-gray-900 mb-3">
               {homeScore}
             </div>
-            <div className="text-lg font-bold text-gray-700 break-words px-2">
+            <div className="text-sm font-bold text-gray-700 break-words px-2">
               {homeTeam}
             </div>
           </div>
 
           {/* VS Separator */}
           <div className="text-center">
-            <div className="text-gray-400 text-2xl font-bold">VS</div>
+            <div className="text-gray-400 text-lg font-bold">VS</div>
           </div>
 
           {/* Away Team */}
           <div className="text-center">
-            <div className="text-6xl font-bold text-gray-900 mb-4">
+            <div className="text-4xl font-bold text-gray-900 mb-3">
               {awayScore}
             </div>
-            <div className="text-lg font-bold text-gray-700 break-words px-2">
+            <div className="text-sm font-bold text-gray-700 break-words px-2">
               {awayTeam}
             </div>
           </div>
         </div>
 
-        <Separator className="my-8" />
+        <Separator className="my-6" />
 
         {/* Match Info */}
-        <div className="grid grid-cols-2 gap-6">
-          <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg">
-            <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center">
-              <Clock className="w-6 h-6 text-gray-700" />
+        <div className="grid grid-cols-2 gap-4">
+          <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+            <div className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
+              <Clock className="w-4 h-4 text-gray-700" />
             </div>
             <div>
-              <p className="text-sm text-gray-600 font-medium">Match Time</p>
-              <p className="text-xl font-bold text-gray-800">{formatTime(matchTime)}</p>
+              <p className="text-xs text-gray-600 font-medium">Match Time</p>
+              <p className="text-lg font-bold text-gray-800">{formatTime(matchTime)}</p>
             </div>
           </div>
-          <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg">
-            <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center">
-              <Users className="w-6 h-6 text-gray-700" />
+          <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+            <div className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
+              <Users className="w-4 h-4 text-gray-700" />
             </div>
             <div>
-              <p className="text-sm text-gray-600 font-medium">Current Quarter</p>
-              <p className="text-xl font-bold text-gray-800">{currentQuarter}</p>
+              <p className="text-xs text-gray-600 font-medium">Current Quarter</p>
+              <p className="text-lg font-bold text-gray-800">{currentQuarter}</p>
             </div>
           </div>
         </div>
