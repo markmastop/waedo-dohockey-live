@@ -22,6 +22,7 @@ interface LiveMatchData {
   status: string;
   last_event: string | null;
   last_event_time: string | null;
+  events: any[] | null;
 }
 
 const LiveMatch = () => {
@@ -31,6 +32,32 @@ const LiveMatch = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showMatchKeyInput, setShowMatchKeyInput] = useState(true);
+
+  const getLatestEventDescription = (matchData: LiveMatchData) => {
+    // First try to get from events array (newest format)
+    if (matchData.events && Array.isArray(matchData.events) && matchData.events.length > 0) {
+      const latestEvent = matchData.events[matchData.events.length - 1];
+      if (latestEvent && typeof latestEvent === 'object' && latestEvent.description) {
+        return latestEvent.description;
+      }
+    }
+    
+    // Fallback to last_event field
+    if (matchData.last_event) {
+      try {
+        // Try to parse as JSON first
+        const eventObj = JSON.parse(matchData.last_event);
+        if (eventObj.description) {
+          return eventObj.description;
+        }
+      } catch {
+        // If not JSON, return as is
+        return matchData.last_event;
+      }
+    }
+    
+    return null;
+  };
 
   const fetchMatchData = async (key: string) => {
     if (!key.trim()) return;
@@ -93,9 +120,13 @@ const LiveMatch = () => {
         (payload) => {
           console.log('Real-time update:', payload);
           if (payload.eventType === 'UPDATE' && payload.new) {
-            setMatchData(payload.new as LiveMatchData);
-            if (payload.new.last_event) {
-              toast.success(`⚽ ${payload.new.last_event}`);
+            const newMatchData = payload.new as LiveMatchData;
+            setMatchData(newMatchData);
+            
+            // Show toast with event description
+            const eventDescription = getLatestEventDescription(newMatchData);
+            if (eventDescription) {
+              toast.success(`⚽ ${eventDescription}`);
             }
           }
         }
@@ -118,6 +149,8 @@ const LiveMatch = () => {
       fetchMatchData(urlKey);
     }
   }, [searchParams]);
+
+  const latestEventDescription = matchData ? getLatestEventDescription(matchData) : null;
 
   return (
     <div className="min-h-screen bg-white p-1">
@@ -159,9 +192,9 @@ const LiveMatch = () => {
               matchTime={matchData.match_time}
             />
 
-            {matchData.last_event && (
+            {latestEventDescription && (
               <LastEvent
-                event={matchData.last_event}
+                event={latestEventDescription}
                 eventTime={matchData.last_event_time}
               />
             )}
