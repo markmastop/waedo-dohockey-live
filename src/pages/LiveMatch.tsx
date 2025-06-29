@@ -9,6 +9,9 @@ import LiveScoreboard from '@/components/LiveMatch/LiveScoreboard';
 import LastEvent from '@/components/LiveMatch/LastEvent';
 import ShareButton from '@/components/LiveMatch/ShareButton';
 import InstructionsCard from '@/components/LiveMatch/InstructionsCard';
+import EventsTimeline from '@/components/LiveMatch/EventsTimeline';
+import { Button } from '@/components/ui/button';
+import { History } from 'lucide-react';
 
 interface LiveMatchData {
   id: string;
@@ -33,6 +36,7 @@ const LiveMatch = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showMatchKeyInput, setShowMatchKeyInput] = useState(true);
+  const [showEventsTimeline, setShowEventsTimeline] = useState(false);
 
   const getLatestEventDescription = (matchData: LiveMatchData) => {
     // First try to get from events array (newest format)
@@ -152,6 +156,7 @@ const LiveMatch = () => {
   }, [searchParams]);
 
   const latestEventDescription = matchData ? getLatestEventDescription(matchData) : null;
+  const events = matchData?.events || [];
 
   return (
     <div className="min-h-screen bg-white p-3">
@@ -214,6 +219,28 @@ const LiveMatch = () => {
               <LastEvent
                 event={latestEventDescription}
                 eventTime={matchData.last_event_time}
+              />
+            )}
+
+            {/* Events Timeline Button */}
+            {events.length > 0 && !showEventsTimeline && (
+              <div className="flex justify-center">
+                <Button
+                  variant="outline"
+                  onClick={() => setShowEventsTimeline(true)}
+                  className="border border-gray-300 hover:bg-gray-50 text-gray-700 px-4 py-2 text-sm"
+                >
+                  <History className="w-4 h-4 mr-2" />
+                  View All Events ({events.length})
+                </Button>
+              </div>
+            )}
+
+            {/* Events Timeline */}
+            {showEventsTimeline && (
+              <EventsTimeline
+                events={events}
+                onClose={() => setShowEventsTimeline(false)}
               />
             )}
 
