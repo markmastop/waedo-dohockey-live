@@ -43,7 +43,7 @@ const MatchStatus = ({ status }: MatchStatusProps) => {
           className={`w-full py-2 text-base font-semibold ${getStatusColor(status)}`}
           disabled
         >
-          {getStatusIcon(status)}
+          
           <span className="capitalize ml-2">{getStatusText(status)}</span>
         </Button>
       </CardContent>
