@@ -230,7 +230,7 @@ const LiveMatch = () => {
                   <Button
                     variant="outline"
                     onClick={() => setShowEventsTimeline(true)}
-                    className="w-full border border-gray-300 hover:bg-gray-100 py-2 text-base font-semibold"
+                    className="w-full border border-purple-300 text-purple-700 bg-purple-50 hover:bg-purple-100 hover:border-purple-400 py-2 text-base font-semibold"
                   >
                     <History className="w-4 h-4 mr-2" />
                     📋 View All Events ({events.length})
