@@ -23,6 +23,7 @@ interface LiveMatchData {
   last_event: string | null;
   last_event_time: string | null;
   events: any[] | null;
+  club_logo_url: string | null;
 }
 
 const LiveMatch = () => {
@@ -168,7 +169,20 @@ const LiveMatch = () => {
         ) : (
           matchData && (
             <div className="flex items-center justify-between bg-white border border-gray-200 rounded-md p-4 shadow-md">
-              <span className="font-mono text-gray-700">Match Key: {matchData.match_key}</span>
+              <div className="flex items-center gap-3">
+                {matchData.club_logo_url && (
+                  <img
+                    src={matchData.club_logo_url}
+                    alt="Club Logo"
+                    className="w-8 h-8 object-contain rounded"
+                    onError={(e) => {
+                      // Hide image if it fails to load
+                      e.currentTarget.style.display = 'none';
+                    }}
+                  />
+                )}
+                <span className="font-mono text-gray-700">Match Key: {matchData.match_key}</span>
+              </div>
               <button
                 className="text-sm text-gray-600 underline"
                 onClick={() => setShowMatchKeyInput(true)}
