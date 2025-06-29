@@ -154,47 +154,51 @@ const LiveMatch = () => {
   const latestEventDescription = matchData ? getLatestEventDescription(matchData) : null;
 
   return (
-    <div className="min-h-screen bg-white p-1">
-      <div className="max-w-lg mx-auto space-y-6">
+    <div className="min-h-screen bg-white p-6">
+      <div className="max-w-lg mx-auto space-y-8">
         <LiveMatchHeader />
 
         {showMatchKeyInput ? (
-          <MatchKeyInput
-            matchKey={matchKey}
-            setMatchKey={setMatchKey}
-            onSubmit={fetchMatchData}
-            loading={loading}
-            error={error}
-          />
+          <div className="mx-4">
+            <MatchKeyInput
+              matchKey={matchKey}
+              setMatchKey={setMatchKey}
+              onSubmit={fetchMatchData}
+              loading={loading}
+              error={error}
+            />
+          </div>
         ) : (
           matchData && (
-            <div className="flex items-center justify-between bg-white border border-gray-200 rounded-md p-4 shadow-md">
-              <div className="flex items-center gap-3">
-                {matchData.club_logo_url && (
-                  <img
-                    src={matchData.club_logo_url}
-                    alt="Club Logo"
-                    className="w-8 h-8 object-contain rounded"
-                    onError={(e) => {
-                      // Hide image if it fails to load
-                      e.currentTarget.style.display = 'none';
-                    }}
-                  />
-                )}
-                <span className="font-mono text-gray-700">Match Key: {matchData.match_key}</span>
+            <div className="mx-4">
+              <div className="flex items-center justify-between bg-white border border-gray-200 rounded-md p-4 shadow-md">
+                <div className="flex items-center gap-3">
+                  {matchData.club_logo_url && (
+                    <img
+                      src={matchData.club_logo_url}
+                      alt="Club Logo"
+                      className="w-8 h-8 object-contain rounded"
+                      onError={(e) => {
+                        // Hide image if it fails to load
+                        e.currentTarget.style.display = 'none';
+                      }}
+                    />
+                  )}
+                  <span className="font-mono text-gray-700">Match Key: {matchData.match_key}</span>
+                </div>
+                <button
+                  className="text-sm text-gray-600 underline"
+                  onClick={() => setShowMatchKeyInput(true)}
+                >
+                  Change
+                </button>
               </div>
-              <button
-                className="text-sm text-gray-600 underline"
-                onClick={() => setShowMatchKeyInput(true)}
-              >
-                Change
-              </button>
             </div>
           )
         )}
 
         {matchData && (
-          <div className="space-y-8 animate-fade-in">
+          <div className="space-y-8 animate-fade-in mx-4">
             <MatchStatus status={matchData.status} />
 
             <LiveScoreboard
@@ -217,7 +221,9 @@ const LiveMatch = () => {
           </div>
         )}
 
-        <InstructionsCard />
+        <div className="mx-4">
+          <InstructionsCard />
+        </div>
       </div>
     </div>
   );
