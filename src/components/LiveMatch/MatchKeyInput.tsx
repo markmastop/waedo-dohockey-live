@@ -29,7 +29,7 @@ const MatchKeyInput = ({ matchKey, setMatchKey, onSubmit, loading, error }: Matc
         <form onSubmit={handleSubmit} className="space-y-4">
           <Input
             type="text"
-            placeholder="ABC123"
+            placeholder="Enter match key (e.g., ABC123)"
             value={matchKey}
             onChange={(e) => setMatchKey(e.target.value.toUpperCase())}
             className="w-full text-center text-lg font-mono border border-gray-300 focus:border-gray-500 py-2 placeholder:text-xs placeholder:text-gray-400"
