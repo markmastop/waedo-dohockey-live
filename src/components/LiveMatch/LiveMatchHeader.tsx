@@ -1,14 +1,12 @@
 const LiveMatchHeader = () => {
   return (
-    <div className="text-center py-8 mb-8">
+    <div className="text-center py-4 space-y-2">
       <img
         src="/lovable-uploads/0eca3ff3-5e4a-4be9-881d-e839832a5b13.png"
         alt="We Do Hockey Logo"
-        className="w-64 h-32 mx-auto object-contain mb-6"
+        className="w-64 h-32 mx-auto object-contain"
       />
-      <h1 className="text-5xl font-bold bg-gradient-to-r from-gray-800 via-gray-600 to-gray-800 bg-clip-text text-transparent">
-        Live Match
-      </h1>
+      <h2 className="text-4xl font-bold text-gray-900">Live Match</h2>
     </div>
   );
 };

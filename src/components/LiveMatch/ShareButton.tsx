@@ -1,3 +1,4 @@
+
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Share2, Sparkles } from 'lucide-react';
@@ -15,23 +16,19 @@ const ShareButton = ({ matchKey }: ShareButtonProps) => {
   };
 
   return (
-    <div className="space-y-4">
-      <div className="flex items-center gap-3">
-        <div className="w-10 h-10 bg-green-100 rounded-2xl flex items-center justify-center">
-          <Share2 className="w-5 h-5 text-green-600" />
-        </div>
-        <h3 className="text-lg font-bold text-green-800">Share Match</h3>
-      </div>
-      
-      <Button
-        onClick={handleShare}
-        className="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white py-4 text-lg font-semibold rounded-2xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300"
-      >
-        <Share2 className="w-5 h-5 mr-3" />
-        📱 Share Match Link
-        <Sparkles className="w-5 h-5 ml-3" />
-      </Button>
-    </div>
+    <Card className="shadow-md border border-gray-200 bg-white">
+      <CardContent className="p-6">
+        <Button
+          onClick={handleShare}
+          variant="outline"
+          className="w-full border border-gray-300 hover:bg-gray-100 py-3 text-lg font-semibold"
+        >
+          <Share2 className="w-5 h-5 mr-3" />
+          📱 Share Match Link
+          <Sparkles className="w-5 h-5 ml-3 text-gray-500" />
+        </Button>
+      </CardContent>
+    </Card>
   );
 };
 
