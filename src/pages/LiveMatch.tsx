@@ -222,18 +222,16 @@ const LiveMatch = () => {
               />
             )}
 
-            {/* Events Timeline Button */}
+            {/* Events Timeline Button - Full width like other boxes */}
             {events.length > 0 && !showEventsTimeline && (
-              <div className="flex justify-center">
-                <Button
-                  variant="outline"
-                  onClick={() => setShowEventsTimeline(true)}
-                  className="border border-gray-300 hover:bg-gray-50 text-gray-700 px-4 py-2 text-sm"
-                >
-                  <History className="w-4 h-4 mr-2" />
-                  View All Events ({events.length})
-                </Button>
-              </div>
+              <Button
+                variant="outline"
+                onClick={() => setShowEventsTimeline(true)}
+                className="w-full border border-gray-300 hover:bg-gray-50 text-gray-700 px-4 py-2 text-sm shadow-md"
+              >
+                <History className="w-4 h-4 mr-2" />
+                View All Events ({events.length})
+              </Button>
             )}
 
             {/* Events Timeline */}
