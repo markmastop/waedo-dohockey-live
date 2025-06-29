@@ -154,70 +154,108 @@ const LiveMatch = () => {
   const latestEventDescription = matchData ? getLatestEventDescription(matchData) : null;
 
   return (
-    <div className="min-h-screen bg-white p-1">
-      <div className="max-w-lg mx-auto space-y-6">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-gray-50 to-stone-50 p-4">
+      <div className="max-w-6xl mx-auto">
         <LiveMatchHeader />
 
         {showMatchKeyInput ? (
-          <MatchKeyInput
-            matchKey={matchKey}
-            setMatchKey={setMatchKey}
-            onSubmit={fetchMatchData}
-            loading={loading}
-            error={error}
-          />
+          <div className="max-w-lg mx-auto">
+            <MatchKeyInput
+              matchKey={matchKey}
+              setMatchKey={setMatchKey}
+              onSubmit={fetchMatchData}
+              loading={loading}
+              error={error}
+            />
+          </div>
         ) : (
           matchData && (
-            <div className="flex items-center justify-between bg-white border border-gray-200 rounded-md p-4 shadow-md">
-              <div className="flex items-center gap-3">
-                {matchData.club_logo_url && (
-                  <img
-                    src={matchData.club_logo_url}
-                    alt="Club Logo"
-                    className="w-8 h-8 object-contain rounded"
-                    onError={(e) => {
-                      // Hide image if it fails to load
-                      e.currentTarget.style.display = 'none';
-                    }}
-                  />
-                )}
-                <span className="font-mono text-gray-700">Match Key: {matchData.match_key}</span>
+            <div className="max-w-lg mx-auto mb-8">
+              <div className="flex items-center justify-between bg-white/80 backdrop-blur-sm border border-gray-200/50 rounded-2xl p-4 shadow-lg">
+                <div className="flex items-center gap-3">
+                  {matchData.club_logo_url && (
+                    <img
+                      src={matchData.club_logo_url}
+                      alt="Club Logo"
+                      className="w-8 h-8 object-contain rounded-lg"
+                      onError={(e) => {
+                        e.currentTarget.style.display = 'none';
+                      }}
+                    />
+                  )}
+                  <span className="font-mono text-gray-700 font-medium">Match Key: {matchData.match_key}</span>
+                </div>
+                <button
+                  className="text-sm text-gray-600 hover:text-gray-800 underline transition-colors"
+                  onClick={() => setShowMatchKeyInput(true)}
+                >
+                  Change
+                </button>
               </div>
-              <button
-                className="text-sm text-gray-600 underline"
-                onClick={() => setShowMatchKeyInput(true)}
-              >
-                Change
-              </button>
             </div>
           )
         )}
 
         {matchData && (
-          <div className="space-y-8 animate-fade-in">
-            <MatchStatus status={matchData.status} />
+          <div className="space-y-6 animate-fade-in">
+            {/* Bento Grid Layout */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+              
+              {/* Main Scoreboard - Takes up most space */}
+              <div className="lg:col-span-8">
+                <div className="bg-white/80 backdrop-blur-sm rounded-3xl border border-gray-200/50 shadow-xl p-8 h-full">
+                  <div className="flex items-center justify-between mb-6">
+                    <MatchStatus status={matchData.status} />
+                  </div>
+                  
+                  <LiveScoreboard
+                    homeTeam={matchData.home_team}
+                    awayTeam={matchData.away_team}
+                    homeScore={matchData.home_score}
+                    awayScore={matchData.away_score}
+                    currentQuarter={matchData.current_quarter}
+                    matchTime={matchData.match_time}
+                  />
+                </div>
+              </div>
 
-            <LiveScoreboard
-              homeTeam={matchData.home_team}
-              awayTeam={matchData.away_team}
-              homeScore={matchData.home_score}
-              awayScore={matchData.away_score}
-              currentQuarter={matchData.current_quarter}
-              matchTime={matchData.match_time}
-            />
+              {/* Side Panel */}
+              <div className="lg:col-span-4 space-y-6">
+                
+                {/* Latest Event */}
+                {latestEventDescription && (
+                  <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-3xl border border-blue-200/50 shadow-lg p-6">
+                    <LastEvent
+                      event={latestEventDescription}
+                      eventTime={matchData.last_event_time}
+                    />
+                  </div>
+                )}
 
-            {latestEventDescription && (
-              <LastEvent
-                event={latestEventDescription}
-                eventTime={matchData.last_event_time}
-              />
-            )}
+                {/* Share Button */}
+                <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-3xl border border-green-200/50 shadow-lg p-6">
+                  <ShareButton matchKey={matchData.match_key} />
+                </div>
 
-            <ShareButton matchKey={matchData.match_key} />
+              </div>
+            </div>
+
+            {/* Instructions Card - Full Width */}
+            <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-3xl border border-amber-200/50 shadow-lg p-8">
+              <InstructionsCard />
+            </div>
+
           </div>
         )}
 
-        <InstructionsCard />
+        {/* Instructions when no match is loaded */}
+        {!matchData && showMatchKeyInput && (
+          <div className="max-w-lg mx-auto mt-8">
+            <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-3xl border border-amber-200/50 shadow-lg p-8">
+              <InstructionsCard />
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
