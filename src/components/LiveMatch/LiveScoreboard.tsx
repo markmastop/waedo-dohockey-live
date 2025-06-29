@@ -74,7 +74,7 @@ const LiveScoreboard = ({
               <Users className="w-4 h-4 text-gray-700" />
             </div>
             <div>
-              <p className="text-xs text-gray-600 font-medium">Current Quarter</p>
+              <p className="text-xs text-gray-600 font-medium">Quarter</p>
               <p className="text-lg font-bold text-gray-800">{currentQuarter}</p>
             </div>
           </div>
