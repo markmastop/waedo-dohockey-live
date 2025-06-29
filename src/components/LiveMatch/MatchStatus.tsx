@@ -1,3 +1,4 @@
+import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Play, Pause, Square, Clock } from 'lucide-react';
 
@@ -25,14 +26,18 @@ const MatchStatus = ({ status }: MatchStatusProps) => {
   };
 
   return (
-    <div className="flex justify-center">
-      <Badge className={`${getStatusColor(status)} text-white px-4 py-1 text-xs font-medium`}>
-        <div className="flex items-center gap-2">
-          {getStatusIcon(status)}
-          <span className="capitalize">{status.replace('_', ' ')}</span>
+    <Card className="shadow-md border border-gray-200 bg-white">
+      <CardContent className="p-4">
+        <div className="flex justify-center">
+          <Badge className={`${getStatusColor(status)} text-white px-4 py-1 text-xs font-medium`}>
+            <div className="flex items-center gap-2">
+              {getStatusIcon(status)}
+              <span className="capitalize">{status.replace('_', ' ')}</span>
+            </div>
+          </Badge>
         </div>
-      </Badge>
-    </div>
+      </CardContent>
+    </Card>
   );
 };
 
